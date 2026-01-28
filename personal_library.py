@@ -6,7 +6,7 @@ def show_menu():
     '''
     Docstring for show_menu
     '''
-    print("\nPersonal Librar Menu")
+    print("\nPersonal Library Menu")
     print("1. Add a book")
     print("2. Remove a book")
     print("3. List all books")
@@ -14,11 +14,14 @@ def show_menu():
     print("5. Exit")
 
 
-def add_book():
+def add_book(library: list[str]):
     '''
-    
+    Adds a book to the library list.
     '''
-    pass # TODO
+    title = input("Enter book title: ").strip()
+    library.append(title)
+
+    print(f"Added: {title} to the Library.")
 
 
 def remove_book():
@@ -42,18 +45,19 @@ def search_book():
     pass # TODO
 
 
-
 def main():
     '''
     Docstring for main
     '''
+    # Initialize an empty library
+    library: list[str] = []
     
     while True:
         show_menu()
         choice = input("Please Choose a Menu Option: ").strip()
 
         if choice == "1":
-            add_book()
+            add_book(library)
         elif choice == "2":
             remove_book()
         elif choice == "3":
