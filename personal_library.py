@@ -4,6 +4,9 @@ Author: Luke Wieder
 Description: Create a library with the ability to add and remove books,
              as well as list the boks added and search for a book.
 '''
+# Initialize an empty library
+library: list[str] = []
+
 
 def show_menu():
     '''
@@ -17,59 +20,76 @@ def show_menu():
     print("5. Exit")
 
 
-def add_book(library):
+def add_book():
     '''
     Adds a book to the library list.
     '''
-    title = input("Enter book title: ").strip()
-    library.append(title)
+    title = input("Enter book title to add: ").strip()
+    author = input("Enter the author's name: ").strip()
+    year_published = input("Enter the year the book was published: ").strip()
+    print(f"Added: {title}")
 
+    # create the dictionary for book
+    book = {"title": title, "author": author,
+             "year_published": year_published}
+
+    library.append(book)
     print(f"Added {title} to the Library.")
-    return library
+    
 
-
-def remove_book(library):
+def remove_book():
     '''
     Removes a book from the library list
     '''
-    title = input("Enter book title: ").strip()
-    library.pop(title)
+    removal = input("Enter book title to remove: ").strip()
+    for book in library:
+        if book["title"].lower() == removal.lower():
+            library.remove(book)
+            print(f"Removed {removal} from the Library.")
+        else:
+            print("Book not found.")
 
-    print(f"Removed {title} from the Library.")
-    return library
+   
 
-
-def list_books(library):
+def list_books():
     '''
     Prints the library
     '''
-    print(library)
+    print("All books in library:")
+    i = 0
+    for book in library:
+        i+=1
+        print(f"{i}: {book["title"]}")
+    print("End of library.")
 
 
 def search_book():
     '''
-    
+    Basic search functionality
     '''
-    pass # TODO
-
+    search = input("Enter a book title to search: ").lower().strip()
+    for book in library:
+        if search in book["title"].lower():
+            print(f"Book found: {book["title"]} by {book["author"]},"
+                  f"published in {book["year_published"]}")
+    print("End of Results.")
 
 def main():
     '''
-    Docstring for main
+    Main function for choice
     '''
-    # Initialize an empty library
-    library: list[str] = []
+
     
     while True:
         show_menu()
         choice = input("Please Choose a Menu Option: ").strip()
 
         if choice == "1":
-            add_book(library)
+            add_book()
         elif choice == "2":
-            remove_book(library)
+            remove_book()
         elif choice == "3":
-            list_books(library)
+            list_books()
         elif choice == "4":
             search_book()
         elif choice == "5":
