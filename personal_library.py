@@ -1,5 +1,8 @@
 '''
-Docstring for personal_library
+Personal Library
+Author: Luke Wieder
+Description: Create a library with the ability to add and remove books,
+             as well as list the boks added and search for a book.
 '''
 
 def show_menu():
@@ -14,28 +17,33 @@ def show_menu():
     print("5. Exit")
 
 
-def add_book(library: list[str]):
+def add_book(library):
     '''
     Adds a book to the library list.
     '''
     title = input("Enter book title: ").strip()
     library.append(title)
 
-    print(f"Added: {title} to the Library.")
+    print(f"Added {title} to the Library.")
+    return library
 
 
-def remove_book():
+def remove_book(library):
     '''
-    
+    Removes a book from the library list
     '''
-    pass # TODO
+    title = input("Enter book title: ").strip()
+    library.pop(title)
+
+    print(f"Removed {title} from the Library.")
+    return library
 
 
-def list_books():
+def list_books(library):
     '''
-    
+    Prints the library
     '''
-    pass # TODO
+    print(library)
 
 
 def search_book():
@@ -59,9 +67,9 @@ def main():
         if choice == "1":
             add_book(library)
         elif choice == "2":
-            remove_book()
+            remove_book(library)
         elif choice == "3":
-            list_books()
+            list_books(library)
         elif choice == "4":
             search_book()
         elif choice == "5":
