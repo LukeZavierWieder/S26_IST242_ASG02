@@ -17,13 +17,15 @@ def show_menu():
     print("2. Remove a book")
     print("3. List all books")
     print("4. Search a book")
-    print("5. Exit")
+    print("5. Update a book")
+    print("6. Exit")
 
 
 def add_book():
     '''
     Adds a book to the library list.
     '''
+    # Get all data for library 
     title = input("Enter book title to add: ").strip()
     author = input("Enter the author's name: ").strip()
     year_published = input("Enter the year the book was published: ").strip()
@@ -32,7 +34,7 @@ def add_book():
     # create the dictionary for book
     book = {"title": title, "author": author,
              "year_published": year_published}
-
+    # Add book to the library
     library.append(book)
     print(f"Added {title} to the Library.")
     
@@ -41,6 +43,7 @@ def remove_book():
     '''
     Removes a book from the library list
     '''
+    # Recieve input for book removal
     removal = input("Enter book title to remove: ").strip()
     for book in library:
         if book["title"].lower() == removal.lower():
@@ -59,7 +62,7 @@ def list_books():
     i = 0
     for book in library:
         i+=1
-        print(f"{i}: {book["title"]}")
+        print(f"{i}: {book["title"]} by {book["author"]}")
     print("End of library.")
 
 
@@ -71,8 +74,30 @@ def search_book():
     for book in library:
         if search in book["title"].lower():
             print(f"Book found: {book["title"]} by {book["author"]},"
-                  f"published in {book["year_published"]}")
+                  f" published in {book["year_published"]}")
     print("End of Results.")
+
+def update_book():
+    '''
+    Allows you to update information on a book
+    '''
+    # Request book to update
+    update = input("Which book would you like to update:").lower().strip()
+    for book in library:
+        if book["title"].lower() == update:
+            print("Please choose an option to update. \n1. Title\n2. Author"
+                "\n3. Publication Year")
+            choice = input()
+            if choice == "1":
+                book["title"] = input("Please enter a new title: ")
+            elif choice == "2":
+                book["author"] = input("Please enter new author: ")
+            elif choice == "3":
+                book["year_published"] = input("Please enter"
+                " new publication year: ")
+            else:
+                print("Book not found.")
+
 
 def main():
     '''
@@ -83,7 +108,7 @@ def main():
     while True:
         show_menu()
         choice = input("Please Choose a Menu Option: ").strip()
-
+        print()
         if choice == "1":
             add_book()
         elif choice == "2":
@@ -93,6 +118,8 @@ def main():
         elif choice == "4":
             search_book()
         elif choice == "5":
+            update_book()
+        elif choice == "6":
             print("Goodbye")
             break
         else:
