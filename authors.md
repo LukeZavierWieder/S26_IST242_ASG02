@@ -1,2 +1,2 @@
-Bassam Mamari
-Luke Wieder
+# Tester: Bassam Mamari
+# Developer: Luke Wieder
