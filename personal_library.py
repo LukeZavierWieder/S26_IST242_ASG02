@@ -82,9 +82,10 @@ def update_book():
     Allows you to update information on a book
     '''
     # Request book to update
-    update = input("Which book would you like to update:").lower().strip()
+    update = input("Which book would you like to update: ").lower().strip()
     for book in library:
-        if book["title"].lower() == update:
+        if update in book["title"].lower():
+            print(f"Updating: {book["title"]}")
             print("Please choose an option to update. \n1. Title\n2. Author"
                 "\n3. Publication Year")
             choice = input()
@@ -103,9 +104,9 @@ def main():
     '''
     Main function for choice
     '''
-
+    valid = False
     
-    while True:
+    while not valid:
         show_menu()
         choice = input("Please Choose a Menu Option: ").strip()
         print()
@@ -121,7 +122,7 @@ def main():
             update_book()
         elif choice == "6":
             print("Goodbye")
-            break
+            valid = True
         else:
             print("Invalid choice. Try Again.")
 
