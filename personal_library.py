@@ -26,17 +26,20 @@ def add_book():
     Adds a book to the library list.
     '''
     # Get all data for library 
-    title = input("Enter book title to add: ").strip()
-    author = input("Enter the author's name: ").strip()
+    title = input("Enter book title to add: ").strip().title()
+    author = input("Enter the author's name: ").strip().title()
     year_published = input("Enter the year the book was published: ").strip()
-    print(f"Added: {title}")
+    
 
     # create the dictionary for book
     book = {"title": title, "author": author,
              "year_published": year_published}
-    # Add book to the library
-    library.append(book)
-    print(f"Added {title} to the Library.")
+    if book in library:
+        print("The book is already in the library.")
+    else:
+        # Add book to the library
+        library.append(book)
+        print(f"Added {title} to the Library.")
     
 
 def remove_book():
@@ -62,7 +65,8 @@ def list_books():
     i = 0
     for book in library:
         i+=1
-        print(f"{i}: {book["title"]} by {book["author"]}")
+        print(f"{i}: {book["title"]} by {book["author"]} published "
+              f"{book["year_published"]}")
     print("End of library.")
 
 
@@ -104,6 +108,7 @@ def main():
     '''
     Main function for choice
     '''
+    # Create validation
     valid = False
     
     while not valid:
